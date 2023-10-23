@@ -1,0 +1,39 @@
+<h1><%= title %></h1>
+
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="book">Book:</label>
+    <select id="book" class="form-control" type="select" placeholder="Select book" name="book" required="true">
+      <% book_list.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
+    <% for (let book of book_list) { %>
+        <option value="<%= book._id %>" <% if (selected_book === undefined) { %> <% } else if (selected_book == book._id.toString()) { %>selected<% } %>><%= book.title %></option>
+    <% } %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="imprint">Imprint:</label>
+    <input id="imprint" class="form-control" type="text" placeholder="Publisher and date information" name="imprint" required="true" value="<%= (undefined===bookinstance ? '' : bookinstance.imprint) %>" />
+  </div>
+  <div class="form-group">
+    <label for="due_back">Date when book available:</label>
+    <input id="due_back" class="form-control" type="date" name="due_back" value="<%= (undefined===bookinstance ? '' : bookinstance.due_back_yyyy_mm_dd) %>" />
+  </div>
+  <div class="form-group">
+    <label for="status">Status:</label>
+    <select id="status" class="form-control" type="select" placeholder="Select status" name="status" required="true">
+      <option value="Maintenance" <% if (undefined===bookinstance || bookinstance.status!='Maintenance') { %> <% } else { %>selected<% } %>>Maintenance</option>
+      <option value="Available" <% if (undefined===bookinstance || bookinstance.status!='Available') { %> <% } else { %>selected<% } %>>Available</option>
+      <option value="Loaned" <% if (undefined===bookinstance || bookinstance.status!='Loaned') { %> <% } else { %>selected<% } %>>Loaned</option>
+      <option value="Reserved" <% if (undefined===bookinstance || bookinstance.status!='Reserved') { %> <% } else { %>selected<% } %>>Reserved</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (errors) { %>
+  <ul>
+    <% for (let error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+<% } %>

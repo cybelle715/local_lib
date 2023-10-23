@@ -1,0 +1,12 @@
+<h4><%= title %>: <%= book_instance.name %></h4>
+<p><%= book_instance.imprint %></p>
+<p><%= book_instance.status %></p>
+<p><%= book_instance.due_back_formatted %></p>
+
+  <p>Do you really want to delete this book instance?</p>
+  <form method='POST' action=''>
+    <div class='form-group'>
+      <input id='book_instance._id' class='form-control' type='hidden' name='book_instance._id' required='true' value='<%= book_instance._id %>' />
+    </div>
+    <button class='btn btn-primary' type='submit'>Delete</button>
+  </form>

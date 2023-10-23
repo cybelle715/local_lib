@@ -1,0 +1,17 @@
+<h4><%= title %></h4>
+
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="name">Genre:</label>
+    <input id="name" class="form-control" type="text" required= true placeholder="Fantasy, Poetry etc." name="name" value="<%= (typeof genre !== 'undefined' ? genre.name : '')  %>">
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (errors) { %>
+  <ul>
+    <% for (let error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+<% } %>

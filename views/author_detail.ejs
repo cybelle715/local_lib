@@ -1,0 +1,25 @@
+<h4>Author: <%= author.name %></h4>
+<p><%= author.date_of_birth_formatted %> - <%= author.date_of_death_formatted %></p>
+
+<div style="margin-left: 20px; margin-top: 20px;">
+  <h4>Books</h4>
+  <dl>
+    <% if (author_books.length > 0) { %>
+      <% author_books.forEach(function(book) { %>
+        <dt>
+          <a href="<%= book.url %>"><%= book.title %></a>
+        </dt>
+        <dd><%= book.summary %></dd>
+      <% }); %>
+    <% } else { %>
+      <p>This author has no books.</p>
+    <% } %>
+  </dl>
+</div>
+<hr>
+<p>
+  <a href="<%= author.url %>/update">Update author</a>
+</p>
+<p>
+  <a href="<%= author.url %>/delete">Delete author</a>
+</p>
